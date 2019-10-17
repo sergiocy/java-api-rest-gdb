@@ -30,14 +30,20 @@ public class PostRequest {
     private static final Logger log = LoggerFactory.getLogger(PostRequest.class);
     private String endp = "";
     private String currentQuery = "";
-    private String encoderValue = "UTF-8";
-    private String mediaTypeValue = "application/x-www-form-urlencoded";
-    private String contentTypeValue = "application/x-www-form-urlencoded";
-    private String acceptValue = "application/json";
+    private String userPass = "";
+    private String encoderValue = "";
+    private String mediaTypeValue = "";
+    private String contentTypeValue = "";
+    private String acceptValue = "";
 
-    public PostRequest(String endp, String currentQuery, String encoderValue, String mediaTypeValue, String contentTypeValue, String acceptValue){
+    public PostRequest(String endp, String userPass, String currentQuery, String encoderValue, String mediaTypeValue, String contentTypeValue, String acceptValue){
         this.endp = endp;
         this.currentQuery = currentQuery;
+        this.userPass = userPass;
+        this.encoderValue = encoderValue;
+        this.mediaTypeValue = mediaTypeValue;
+        this.contentTypeValue = contentTypeValue;
+        this.acceptValue = acceptValue;
     }
 
 
@@ -87,6 +93,7 @@ public class PostRequest {
 			httppost.setEntity(new UrlEncodedFormEntity(params, this.encoderValue));
 			httppost.addHeader("Content-Type", this.contentTypeValue);
 			httppost.addHeader("Accept", this.acceptValue);
+            httppost.addHeader("authorization", this.userPass);
 		} 
     	catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

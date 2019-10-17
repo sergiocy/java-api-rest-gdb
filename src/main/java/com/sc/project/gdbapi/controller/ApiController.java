@@ -31,6 +31,12 @@ public class ApiController {
 
     private static final Logger log = LoggerFactory.getLogger(ApiController.class);
     String endpRepo = "http://localhost:7200/repositories/scientific-info";
+    // user/pass generated in postman (tab authorization -> Basic Auth, generate parameter authorization in header)
+    String userNameGdb = "Basic YWRtaW46c2VyZ2lv";
+    String encoderValue = "UTF-8";
+    String mediaTypeValue = "application/x-www-form-urlencoded";
+    String contentTypeValue = "application/x-www-form-urlencoded";
+    String acceptValue = "application/json";
 
     //@Value("${database.triplets.endpoint}")
     //private String endRepo;
@@ -59,12 +65,12 @@ public class ApiController {
         
         
         // ...BUILD QUERY...
-        SparqlQuery qryObj = new SparqlQuery(intent, tags);;
+        SparqlQuery qryObj = new SparqlQuery(intent, tags);
         String qry = qryObj.getQry();
 
 
         // ...SEND POST REQUEST WITH METHOD "generatePostRequestV2()"...
-        PostRequest postReq = new PostRequest(endpRepo, qry, null, null, null, null);
+        PostRequest postReq = new PostRequest(endpRepo, userNameGdb, qry, encoderValue, mediaTypeValue, contentTypeValue, acceptValue);
         HttpResponse httpRes = postReq.generatePostRequestV2();
        
 
